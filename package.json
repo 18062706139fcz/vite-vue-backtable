@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --mode development",
+    "build:beta": "vite build --mode beta",
+    "build:release": "vite build --mode release",
+    "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "vue": "^3.2.37",
     "vue-router": "^4.0.13"
   },

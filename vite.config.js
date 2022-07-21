@@ -11,5 +11,6 @@ export default defineConfig({
       '~': path.resolve(__dirname,'./'),
       '@': path.resolve(__dirname,'src')
     },
-  }
+    extensions: ['.vue', '.js', 'jsx', '.json']
+  },
 })
