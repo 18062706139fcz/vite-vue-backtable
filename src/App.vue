@@ -3,18 +3,49 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import { toRefs, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+// 路由监听
+import { localGet, pathMap } from './utils';
 export default {
     name: 'App',
     components:{
       Header,
       Footer
+    },
+    setup() {
+      const noMenu = ['/login']
+      const router = useRouter()
+      const state = reactive({
+        showMenu: true,
+      })
+      router.beforeEach((to) => {
+        state.showMenu = !noMenu.includes(to.path)
+      })
+      // 路由监听函数
+      router.beforeEach((to, from, next) => {
+        if(to.path == '/login') {
+          next()
+        } else {
+          if(!localGet('token')) {
+            next({path: '/login'})
+          } else {
+            next()
+          }
+        }
+        state.showMenu = !noMenu.includes(to.path)
+        document.title = pathMap[to.name]
+      })
+      return {
+        ...toRefs(state)
+      }
     }
 }
 </script>
 
 <template>
 <div class="layout">
-    <el-container class="container">
+    <el-container  v-if="showMenu" class="container">
         <el-aside class="aside">
             <!-- 系统名称➕logo -->
             <div class="head">
@@ -50,6 +81,9 @@ export default {
             </div>
             <Footer></Footer>
         </el-container>
+    </el-container>
+    <el-container v-else class="container">
+      <router-view></router-view>
     </el-container>
 </div>
 </template>

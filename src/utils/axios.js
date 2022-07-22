@@ -7,6 +7,7 @@ import { localGet } from './index'
 
 // 后端没有区分测试和正式，写成一个接口。
 axios.defaults.baseURL = config[import.meta.env.MODE].baseURL
+// axios.defaults.baseURL = 'backend-api-02.newbee.ltd/'
 // 携带 cookie 对目前项目没什么作用，因为我们是 token 鉴权
 axios.defaults.withCredentials = true
 // 请求头,headers 信息
@@ -18,9 +19,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 // 设置本地数据获取的封装
 axios.defaults.headers['token'] = localGet('token') || ''
 
-ElMessage.error('服务器异常！')
+// ElMessage.error('服务器异常！')
 
-ElMessage.error(res.data.message)
+// ElMessage.error(res.data.message)
 
 // 请求拦截器，内部根据返回值，重新组装，统一管理。
 axios.interceptors.response.use(res => {
