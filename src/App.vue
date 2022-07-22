@@ -1,8 +1,14 @@
 <script>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 export default {
-    name: 'App'
+    name: 'App',
+    components:{
+      Header,
+      Footer
+    }
 }
 </script>
 
@@ -32,14 +38,17 @@ export default {
                     </template>
                     <el-menu-item-group>
                         <el-menu-item index="/"><i class="el-icon-data-line" />首页</el-menu-item>
+                        <el-menu-item index="/add"><i class="el-icon-data-line" />添加商品</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>
         </el-aside>
         <el-container class="content">
+            <Header></Header>
             <div class="main">
               <router-view/>
             </div>
+            <Footer></Footer>
         </el-container>
     </el-container>
 </div>
@@ -94,7 +103,7 @@ export default {
   overflow: hidden;
 }
 .main {
-  height: 100vh;
+  height: calc(100vh - 100px);
   overflow: auto;
   padding: 10px
 }
