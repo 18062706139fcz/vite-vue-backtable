@@ -67,7 +67,7 @@ export default {
         const submitForm = async () => {
             loginForm.value.validate((valid) => {
                 if (valid) {
-                    axios.post('backend-api-02.newbee.ltd/api/v1/user/login', {
+                    axios.post('/adminUser/login', {
                         userName: state.ruleForm.username || '',
                         passwordMd5: md5(state.ruleForm.password),
                     }).then(res => {
